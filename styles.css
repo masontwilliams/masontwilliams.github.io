@@ -1,0 +1,95 @@
+/* styles.css */
+
+/* Reset some basic styles to ensure consistency across browsers */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif; /* Set the font family for the entire page */
+    display: flex; /* Use flexbox for body layout */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center items horizontally */
+    height: 100vh; /* Full viewport height */
+    background-color: #F5F5F5; /* Light gray background */
+    justify-content: center; /* Center items vertically */
+}
+
+/* Header styling */
+header {
+    width: 100%; /* Full width header */
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+header h1, header h2 {
+    color: #333333; /* Dark gray text color */
+}
+
+/* Container for centering content */
+.container {
+    background: white; /* White background for the container */
+    padding: 20px; /* Padding inside the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 400px; /* Maximum width of the container */
+    width: 100%; /* Full width up to the max-width */
+    text-align: center; /* Center the text inside the container */
+    border: 2px solid #FF671B; /* Orange border */
+}
+
+/* Form styling */
+form {
+    display: flex; /* Use flexbox for form layout */
+    flex-direction: column; /* Arrange form elements in a column */
+    gap: 15px; /* Space between form elements */
+}
+
+/* Input styling */
+input[type="text"],
+input[type="password"] {
+    padding: 10px; /* Padding inside input fields */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners for input fields */
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin: auto; /* Center the input fields */
+}
+
+/* Button styling */
+button {
+    padding: 10px; /* Padding inside button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for button */
+    background-color: #FF671B; /* Orange background */
+    color: #FFFFFF; /* White text */
+    font-size: 16px; /* Font size for button text */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #FFA500; /* Lighter orange background on hover */
+}
+
+/* Result styling */
+#result {
+    margin-top: 20px; /* Space above the result section */
+}
+
+/* Bracket styling */
+.bracket {
+    display: flex; /* Use flexbox for bracket layout */
+    justify-content: center; /* Center bracket items */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+}
+
+.match {
+    border: 1px solid #FF671B; /* Orange border */
+    margin: 10px; /* Margin around each match */
+    padding: 10px; /* Padding inside each match */
+    border-radius: 5px; /* Rounded corners for matches */
+    background-color: #e9ecef; /* Light gray background for matches */
+    text-align: center; /* Center text inside matches */
+}

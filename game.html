@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Rock, Paper, Scissors Tournament</h1> <!-- Page title -->
+    </header>
+    <div class="container">
+        <form id="gameForm"> <!-- Game form -->
+            <h2>Choose your move:</h2> <!-- Instruction -->
+            <button type="button" onclick="submitChoice('rock')">Rock</button> <!-- Rock button -->
+            <button type="button" onclick="submitChoice('paper')">Paper</button> <!-- Paper button -->
+            <button type="button" onclick="submitChoice('scissors')">Scissors</button> <!-- Scissors button -->
+        </form>
+        <div id="result"></div> <!-- Result display area -->
+    </div>
+    <div class="container" id="bracketContainer"></div> <!-- Bracket display area -->
+    <script>
+        // Function to submit the user's choice
+        function submitChoice(choice) {
+            const formData = new FormData();
+            formData.append('choice', choice);
+
+            fetch('play.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('result').innerText = data; // Display the result
+                fetchBracket(); // Update the bracket
+            });
+        }
+
+        // Function to fetch and display the tournament bracket
+        function fetchBracket() {
+            fetch('fetch_brackets.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('bracketContainer').innerHTML = data; // Display the bracket
+            });
+        }
+
+        // Fetch the bracket initially
+        fetchBracket();
+    </script>
+</body>
+</html>
