@@ -2,51 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rock, Paper, Scissors</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+    <title>Game - Tournament</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Rock, Paper, Scissors Tournament</h1> <!-- Page title -->
+        <h1>Welcome to the Game</h1>
+        <div class="user-info">Logged in as: <span id="username"></span></div>
+        <button onclick="logout()">Log Out</button>
     </header>
     <div class="container">
-        <form id="gameForm"> <!-- Game form -->
-            <h2>Choose your move:</h2> <!-- Instruction -->
-            <button type="button" onclick="submitChoice('rock')">Rock</button> <!-- Rock button -->
-            <button type="button" onclick="submitChoice('paper')">Paper</button> <!-- Paper button -->
-            <button type="button" onclick="submitChoice('scissors')">Scissors</button> <!-- Scissors button -->
-        </form>
-        <div id="result"></div> <!-- Result display area -->
+        <h2>Your Match:</h2>
+        <div id="matchInfo">
+            <button id="playRock" onclick="playMove('rock')"><img src="images/4221-dwayneeyebrow.png" alt="Dwayne Johnson not found" class="choice-img"> Rock</button>
+            <button id="playPaper" onclick="playMove('paper')">📄 Paper</button>
+            <button id="playScissors" onclick="playMove('scissors')">✂️ Scissors</button>
+        </div>
+        <h3>Your Choice: <span id="yourChoice"></span></h3>
+        <h3>Winner: <span id="winnerInfo"></span></h3>
+        <div id="rematchPrompt" style="display:none;">
+            <p>It's a tie! Please select again.</p>
+        </div>
+        <h2>Current Brackets</h2>
+        <div id="bracketContainer"></div>
     </div>
-    <div class="container" id="bracketContainer"></div> <!-- Bracket display area -->
-    <script>
-        // Function to submit the user's choice
-        function submitChoice(choice) {
-            const formData = new FormData();
-            formData.append('choice', choice);
-
-            fetch('play.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('result').innerText = data; // Display the result
-                fetchBracket(); // Update the bracket
-            });
-        }
-
-        // Function to fetch and display the tournament bracket
-        function fetchBracket() {
-            fetch('fetch_brackets.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('bracketContainer').innerHTML = data; // Display the bracket
-            });
-        }
-
-        // Fetch the bracket initially
-        fetchBracket();
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>
+
+
+
+

@@ -1,21 +1,13 @@
 <?php
 session_start();
-include 'tournament_data.php'; // Include the tournament data
+require 'functions.php';
 
-// Load the current bracket
-$bracket = loadTournamentData();
-
-ob_start(); // Start output buffering
-
-echo '<div class="bracket">';
-foreach ($bracket as $match) {
-    echo '<div class="match">';
-    echo '<p>' . htmlspecialchars($match[0]) . ' vs ' . htmlspecialchars($match[1]) . '</p>';
-    echo '</div>';
+if (!isset($_SESSION['username'])) {
+    echo json_encode(["error" => "Authentication required"]);
+    exit;
 }
-echo '</div>';
 
-$html_output = ob_get_clean(); // Get the contents of the output buffer and clean it
-
-echo $html_output;
+// Assuming bracket data is stored in 'tournament_bracket.json'
+$bracketData = loadData('tournament_bracket.json');
+echo json_encode($bracketData);
 ?>

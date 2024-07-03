@@ -1,17 +1,25 @@
 <?php
 session_start();
-include 'tournament_data.php'; // Include the tournament data
 
-// Get the username and password from the POST request
+// Load user credentials from a JSON file
+function loadCredentials() {
+    $file = 'participants.json';
+    return file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+}
+
+$users = loadCredentials();
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-// Check if the username exists and the password matches
-if (isset($users[$username]) && $users[$username] === $password) {
-    $_SESSION['username'] = $username; // Store the username in the session
-    header("Location: game.html"); // Redirect to the game page
+// Check credentials and set session
+if (isset($users[$username]) && password_verify($password, $users[$username]['password'])) {
+    $_SESSION['username'] = $username;
+    $_SESSION['role'] = $users[$username]['role'];  // 'admin' or 'participant'
+    // Redirect based on role
+    header("Location: " . ($users[$username]['role'] === 'admin' ? 'admin.html' : 'game.html'));
     exit();
 } else {
-    echo "Invalid username or password"; // Display error message
+    header("Location: index.html?error=Invalid%20Credentials");
+    exit();
 }
 ?>

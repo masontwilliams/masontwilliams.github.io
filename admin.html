@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Tournament</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <div class="user-info">Logged in as: <span id="username"></span></div>
+    </header>
+    <div class="container">
+        <h2>Add Players</h2>
+        <form id="addPlayerForm">
+            <label for="newPlayer">Player Username:</label>
+            <input type="text" id="newPlayer" required>
+            <label for="newPassword">Player Password:</label>
+            <input type="password" id="newPassword" required>
+            <button type="button" onclick="addPlayer()">Add Player</button>
+            <button type="button" onclick="initializeTournament()">Initialize Tournament</button>
+            <button type="button" onclick="resetTournament()">Reset Tournament</button>
+        </form>
+        <button onclick="logout()">Log Out</button>
+        
+        <h2>Current Brackets</h2>
+        <div id="bracketContainer"></div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
+
