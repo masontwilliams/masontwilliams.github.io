@@ -1,6 +1,6 @@
 /* General styles for the body and text elements */
 body, h1, h2, h3, button, input {
-    font-family: Arial, sans-serif;
+    font-family:
     margin: 0;
     padding: 8px;
     box-sizing: border-box;
@@ -103,4 +103,3 @@ h2, h3 {
     top: 10px;
     right: 10px;
 }
-

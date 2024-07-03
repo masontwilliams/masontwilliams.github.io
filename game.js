@@ -17,11 +17,17 @@ function playMove(choice) {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.result.includes("tie")) {
+        if (data.result === "tie") {
             document.getElementById('rematchPrompt').style.display = 'block';
-            document.getElementById('winnerInfo').textContent = '';
-        } else {
-            document.getElementById('winnerInfo').textContent = `${data.result} (Opponent's Choice: ${getChoiceImage(data.opponentMove)} ${data.opponentMove})`;
+            document.querySelectorAll('#matchInfo button').forEach(button => {
+                button.classList.remove('selected');
+            });
+            document.getElementById('yourChoice').textContent = '';
+            document.getElementById('winnerInfo').textContent = data.message;
+        } else if (data.result === "win" || data.result === "lose") {
+            document.getElementById('winnerInfo').innerHTML = `${data.result === "win" ? "You win!" : "You lose!"} (Opponent's Choice: ${getChoiceImage(data.opponentMove)} ${capitalize(data.opponentMove)})`;
+        } else if (data.result === "waiting") {
+            document.getElementById('winnerInfo').textContent = data.message;
         }
         fetchBrackets();  // Fetch updated brackets after each move
     })
@@ -35,7 +41,7 @@ function capitalize(word) {
 function getChoiceImage(choice) {
     switch (choice) {
         case 'rock':
-            return '<img src="images/4221-dwayneeyebrow.png" alt="Dwayne Johnson not found" class="choice-img">';
+            return '<img src="images/4221-dwayneeyebrow.png" alt="Rock" class="choice-img">';
         case 'paper':
             return '📄';
         case 'scissors':
@@ -92,9 +98,3 @@ displayUsername();
 document.getElementById('playRock').addEventListener('click', () => playMove('rock'));
 document.getElementById('playPaper').addEventListener('click', () => playMove('paper'));
 document.getElementById('playScissors').addEventListener('click', () => playMove('scissors'));
-
-
-
-
-
-

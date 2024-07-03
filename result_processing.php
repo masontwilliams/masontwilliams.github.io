@@ -46,21 +46,22 @@ if (isset($currentMatch['moves'][$currentMatch['player1']]) && isset($currentMat
         unset($currentMatch['moves'][$currentMatch['player1']]);
         unset($currentMatch['moves'][$currentMatch['player2']]);
         saveData('tournament_bracket.json', $brackets);
-        echo json_encode(["result" => "It's a tie! Please play again."]);
+        echo json_encode(["result" => "tie", "message" => "It's a tie! Please make your selection again."]);
         exit;
     }
 
     $currentMatch['winner'] = $winner;
     advanceWinner($brackets, $winner);
     saveData('tournament_bracket.json', $brackets);
+    $opponentMove = ($winner === $currentMatch['player1']) ? $player2Move : $player1Move;
     echo json_encode([
-        "result" => $winner === $playerUsername ? "You win!" : "You lose!",
+        "result" => $winner === $playerUsername ? "win" : "lose",
         "yourMove" => $playerMove,
-        "opponentMove" => $winner === $currentMatch['player1'] ? $player2Move : $player1Move
+        "opponentMove" => $opponentMove
     ]);
 } else {
     saveData('tournament_bracket.json', $brackets);
-    echo json_encode(["result" => "Waiting for opponent's move."]);
+    echo json_encode(["result" => "waiting", "message" => "Waiting for opponent's move..."]);
 }
 ?>
 
